@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>  
+    <script src="js/vue.js"></script>  
+
+    <style>
+        .red1 {
+            color: red
+        }
+        
+        .green2 {
+            color: green
+        }
+    </style>
+        
+</head>
+<body>
+    <div id="app">
+        <form action="">
+            Name: <input type="text" name="name" id="" v-model="name">
+            Age: <input type="text" name="age" id="" v-model="age">
+            Password: <input type="password" name="password" id="" v-model="password">
+
+        </form>
+
+        <button @click="enviar()">OK</button>
+
+        <ul>
+            <li v-for="usuario in usuarios">{{ usuario.nome | setMaiusculo | truncar(4) }}</li>
+        </ul>
+            
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+               name: "",
+               age: "",
+               password: "",
+               nomeImg: "img/carro1.jpg",
+               alt: "Carro desconhecido",
+               style: "red1",
+               usuarios: [
+                   { nome: "Jose" },
+                   { nome: "Chico" },
+                   { nome: "Francisco" },                   
+                ]
+            },
+            methods: {
+                enviar() {
+                    var result = this.name + " " + this.age + " " + this.password;
+                    alert(result);
+                }
+            },
+            filters: {
+                setMaiusculo(str) {
+                    return str.toUpperCase();
+                }, 
+                truncar(str, length) {
+                    if(str.length > length) {
+                        str = str.substring(0, length) + " ...";
+                    }
+                    return str;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
